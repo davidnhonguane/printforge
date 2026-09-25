@@ -1,56 +1,50 @@
-"use client";
-
+import Link from "next/link";
 import Image from "next/image";
-import { Albert_Sans } from "next/font/google";
-import { Montserrat } from "next/font/google";
-import { Heart } from "lucide-react";
-import { Model } from "../lib/types";
-
-const AlbertHans = Albert_Sans({
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const MontserratFont = Montserrat({
-  subsets: ["latin"],
-  weight: "700",
-});
+import type { Model } from "../lib/types"
 
 
-export default function ModelCard({ model }: {model: Model}) {
+
+export default async function ModelCard({model}: {model: Model}  ) {
+
+
   return (
-    <div className="border rounded-lg w-80 mt-10 mr-10 overflow-hidden border-gray-300 transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-      <Image
-        src="/hero-image1.jpg"
-        alt="Model Thumbnail"
-        width={300}
-        height={200}
-        className="w-full"
-      />
 
-      <div className="p-2">
-        <h2 className={`${MontserratFont.className} text-xl font-bold mt-2`}>
-          {model.name}
-        </h2>
-        <p className={`${AlbertHans.className} text-sm text-gray-600`}>
-          {model.description}
-        </p>
-
-        <div
-          className={`${AlbertHans.className} text-sm text-gray-600 border rounded-2xl px-2 py-1 mt-2 w-max`}
-        >
-          <p>{model.category}</p>
+    <Link
+      href={`/3DModels/${model.id}`}
+      className="block group hover:shadow-[0_5px_12px_rgba(0,0,0,0.1)] hover:-translate-y-[3px] transition-all"
+    >
+      <div
+        className="overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg"
+        role="article"
+      >
+        <div className="relative aspect-square">
+          <Image
+            src="/hero-image1.jpg"
+            width={500}
+            height={500}
+            alt={model.name}
+            className="absolute inset-0 object-cover w-full h-full"
+          />
         </div>
-
-        <div className="flex mt-2">
-          <Heart className="w-5 h-5 text-gray-600" />
-          <span
-            className={`${AlbertHans.className} text-sm text-gray-600 ml-2`}
-          >
-            {model.likes}
-          </span>
+        <div className="p-4">
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold text-gray-800 line-clamp-2 leading-tight">
+              {model.name}
+            </h2>
+          </div>
+          <p className="text-gray-800 text-sm line-clamp-2 min-h-[2.5rem] leading-[1.25rem]">
+            {model.description}
+          </p>
+          <div className="mt-2">
+            <span className="inline-block bg-transparent border border-gray-400 rounded-full px-3 py-1 text-sm text-gray-800">
+              {model.category}
+            </span>
+          </div>
+          <div className="flex items-center mt-2 text-gray-600">
+            <span>&hearts; {model.likes}</span>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -1,22 +1,28 @@
-import type { NavLinkProps } from "../lib/types.js";
-import Link from "next/link";
+"use client"
+
+import Link from 'next/link'
 import { Albert_Sans } from "next/font/google";
+import {usePathname} from "next/navigation" 
 
 const AlbertHans = Albert_Sans({
   subsets: ["latin"],
   weight: "400",
 });
 
-export default function NavLink({ href, children, isActive }: NavLinkProps) {
+export default function NavLink({href, children, exact}:{
+  href:string,
+  children:React.ReactNode
+  exact?: boolean
+}){
 
-  console.log("isActive:", isActive); // Debugging line to check the value of isActive
+  const pathname = usePathname();
+
+  const isActive = exact ? pathname == href : pathname.startsWith(href);
 
   return (
-      <Link href={href}
-        className=
-        {`${AlbertHans.className} font-semibold text-gray-700 tracking-wider leading-none hover:text-orange-500 bpb-2 hover:border-orange-500 ${isActive ? "text-orange-500 border-b border-orange-500 pb-2" : "border-transparent"}`}
-      >
-        {children}
-      </Link>
-  );
+    <li className="text-sm uppercase">
+      <Link className={AlbertHans.className + `px-4 py-2 transition-colors rounded-md cursor-pointer hover:text-orange-400 text-gray-700 ${isActive ? "text-orange-400" : "text-gray-700" }`}
+        href={href}>{children}</Link>
+    </li>
+  )
 }

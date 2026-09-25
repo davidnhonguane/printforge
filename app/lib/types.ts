@@ -13,6 +13,6 @@ export type Model = {
 }
 
 export type Category = {
-  name: string,
+  displayName: string,
   slug: string
 }

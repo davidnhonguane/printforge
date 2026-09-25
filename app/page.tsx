@@ -41,17 +41,14 @@ export default function Home() {
             Join our community of creators and explore a vast library of
             user-submitted models.
           </p>
-
-          <Link href="/models" className="flex justify-start mt-5">
-            <button
+          <div className="pt-10">
+            <Link
+              href="/3DModels"
               className={`${AlbertHans.className} border-2 px-2 py-2 text-[14px] font semi-bold uppercase mt-15 tracking-wider bg-transparent hover:bg-black hover:text-white transition`}
-              onClick={() => {
-                window.location.href = "/models";
-              }}
-            > 
+            >
               BROWSE MODELS
-            </button>
-          </Link>
+            </Link>
+          </div>
         </div>
 
         <div className="flex justify-end">

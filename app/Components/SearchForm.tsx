@@ -1,25 +1,17 @@
-import Form from "next/form";
-import { Albert_Sans } from "next/font/google";
+import Form from "next/form"
 
-export default function SearchForm() {
-
-
-  const AlbertHans = Albert_Sans({
-    subsets: ["latin"],
-    weight: "400",
-  });
-
+export default function SearchForm({search}: {search?: string}){
   return (
-    <Form action="/3DModels">
+    <Form action="/3DModels" className="w-full px-5 md:px-0 md:max-w-xl">
       <input
         type="text"
-        name="query"
-        className={
-          AlbertHans.className +
-          " border border-gray-300 rounded-full px-4 py-2 p-2 pr-30"
-        }
-        placeholder="Search for a model"
+        defaultValue={search}
+        id="search"
+        name="search"
+        placeholder="E.g. dragon"
+        autoComplete="off"
+        className="w-full py-3 pl-5 pr-5 text-sm placeholder-gray-500 bg-white border border-[#606060] rounded-full focus:border-[#606060] focus:outline-none focus:ring-0 md:text-base"
       />
     </Form>
-  );
+  )
 }
